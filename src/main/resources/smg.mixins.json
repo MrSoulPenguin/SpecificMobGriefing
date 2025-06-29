@@ -1,0 +1,23 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.mrsoulpenguin.smg.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "entity.mob.EndermanEntityPickUpBlockGoalMixin",
+    "entity.mob.EndermanEntityPlaceBlockGoalMixin",
+    "entity.mob.MobEntityMixin",
+    "entity.mob.PiglinEntityMixin",
+    "entity.player.PlayerEntityMixin",
+    "entity.projectile.FireballEntityMixin",
+    "server.world.ServerWorldMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

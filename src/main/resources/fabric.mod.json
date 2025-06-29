@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "smg",
+  "version": "${version}",
+  "name": "SpecificMobGriefing",
+  "description": "A mod that allows for more granular control of mob griefing for specific mobs",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      "me.mrsoulpenguin.smg.Smg"
+    ]
+  },
+  "mixins": [
+    "smg.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
