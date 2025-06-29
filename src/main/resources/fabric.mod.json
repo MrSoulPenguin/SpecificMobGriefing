@@ -4,9 +4,11 @@
   "version": "${version}",
   "name": "SpecificMobGriefing",
   "description": "A mod that allows for more granular control of mob griefing for specific mobs",
-  "authors": [],
+  "authors": [
+    "MrSoulPenguin"
+  ],
   "contact": {},
-  "license": "All-Rights-Reserved",
+  "license": "MIT",
   "environment": "server",
   "entrypoints": {
     "main": [
