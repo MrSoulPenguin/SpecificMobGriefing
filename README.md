@@ -5,7 +5,7 @@ Simple serverside mod that adds in more specific gamerules to better control cer
 Gets a lil' annoying wanting to make a Villager breeder, but would also prefer Endermen not spatter
 the land with their mess. So we've got this.
 
-Following at the gamerules added. They do what it says on the tin:
+Following are the gamerules added. They do what they say on the tin:
 * allowVillagerItemPickup
 * allowPiglinBartering
 * allowEndermanBlockInteraction
