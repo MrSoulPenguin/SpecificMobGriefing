@@ -21,6 +21,8 @@ public abstract class FireballEntityMixin {
         if (world instanceof ServerWorld serverWorld) {
             Entity owner = fireball.getOwner();
             if (owner instanceof GhastEntity && !serverWorld.getGameRules().getBoolean(Smg.ALLOW_GHAST_EXPLOSION_DESTRUCTION)) {
+                // Setting the explosion source to ExplosionSourceType.NONE means that when the explosion it created in
+                // the ServerWorld, it's destruction type will be set to DestructionType.KEEP, not breaking any blocks.
                 return World.ExplosionSourceType.NONE;
             }
         }
