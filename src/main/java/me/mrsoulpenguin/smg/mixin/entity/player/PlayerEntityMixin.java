@@ -1,33 +1,24 @@
 package me.mrsoulpenguin.smg.mixin.entity.player;
 
+import me.mrsoulpenguin.smg.RemembersOwner;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.ProjectileDeflection;
-import net.minecraft.entity.mob.GhastEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireballEntity;
-import net.minecraft.entity.projectile.ProjectileEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerEntity.class)
 public class PlayerEntityMixin {
 
-    @Redirect(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/projectile/ProjectileEntity;deflect(Lnet/minecraft/entity/ProjectileDeflection;Lnet/minecraft/entity/Entity;Lnet/minecraft/entity/Entity;Z)Z"))
-    private boolean maintainGhastOwnership(ProjectileEntity projectile, ProjectileDeflection deflection, Entity deflector, Entity owner, boolean fromAttack) {
-        if (projectile instanceof FireballEntity fireball) {
-            Entity fireballOwner = fireball.getOwner();
-
-            // Gotta reassign ownership back to the Ghast so that FireballEntityMixin properly cancels an explosion on
-            // deflection if it's a Ghast fireball being deflected.
-            //
-            // Otherwise, the owner gets reassigned to the player deflecting the fireball.
-            if (fireballOwner instanceof GhastEntity) {
-                return projectile.deflect(deflection, deflector, fireballOwner, fromAttack);
+    @Inject(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/projectile/ProjectileEntity;deflect(Lnet/minecraft/entity/ProjectileDeflection;Lnet/minecraft/entity/Entity;Lnet/minecraft/entity/Entity;Z)Z"))
+    private void saveOriginalOwner(Entity target, CallbackInfo ci) {
+        if (target instanceof FireballEntity fireball) {
+            if (fireball instanceof RemembersOwner remembers) {
+                remembers.specificMobGriefing$rememberOwner(fireball.getOwner());
             }
         }
-
-        return projectile.deflect(deflection, deflector, owner, fromAttack);
     }
 
 }
