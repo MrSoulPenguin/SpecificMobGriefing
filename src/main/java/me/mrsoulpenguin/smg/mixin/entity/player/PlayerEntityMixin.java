@@ -20,6 +20,8 @@ public class PlayerEntityMixin {
 
             // Gotta reassign ownership back to the Ghast so that FireballEntityMixin properly cancels an explosion on
             // deflection if it's a Ghast fireball being deflected.
+            //
+            // Otherwise, the owner gets reassigned to the player deflecting the fireball.
             if (fireballOwner instanceof GhastEntity) {
                 return projectile.deflect(deflection, deflector, fireballOwner, fromAttack);
             }
